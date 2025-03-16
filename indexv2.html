@@ -225,7 +225,6 @@
     <script>
       function __exec(varInput) {
         const [nested, flat] = parseData(varInput);
-        console.log(nested, flat);
         renderMenuItem(nested);
         initSearch(nested, flat);
         initScroll();

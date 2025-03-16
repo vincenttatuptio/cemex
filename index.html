@@ -329,13 +329,17 @@
 
         svg.appendChild(path);
 
+        const svgDiv = document.createElement("div");
+        svgDiv.className = "w-3";
+        svgDiv.appendChild(svg);
+
         if (item.children.length == 0) svg.classList.add("collapse");
         else {
           button.setAttribute("aria-controls", `dropdown-${item.Id}`);
           button.setAttribute("data-collapse-toggle", `dropdown-${item.Id}`);
         }
 
-        button.appendChild(svg);
+        button.appendChild(svgDiv);
 
         const iconSpan = createIcon(item);
         const span = document.createElement("span");
@@ -459,14 +463,20 @@
       }
 
       function createIcon(item) {
-        const iconSpan = !!item.Icon
-          ? document.createElement("img")
-          : document.createElement("div");
-        iconSpan.className = excludeIndentationIds.has(item.Parent)
+        let iconElement;
+
+        if (!!item.Icon) {
+          iconElement = document.createElement("div");
+          iconElement.innerHTML = item.Icon;
+        } else {
+          iconElement = document.createElement("div");
+        }
+
+        iconElement.className = excludeIndentationIds.has(item.Parent)
           ? "ms-3 w-2"
           : "ms-3 w-6";
-        iconSpan.src = item.Icon;
-        return iconSpan;
+
+        return iconElement;
       }
 
       function createSeparator(li) {
@@ -489,8 +499,8 @@
             "Home",
             1,
             2,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVCKBQA",
-            "//LUCA_NF/LUCA_NF/Development/Welcome.wss#Frame2",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
+            "",
             "",
           ],
           [
@@ -498,7 +508,7 @@
             "MyLUCA",
             1,
             3,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVKKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -508,7 +518,7 @@
             "Company Performance - MTM",
             4,
             5,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVSKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -517,7 +527,7 @@
             "Business Narrative",
             5,
             6,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxNlOKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -526,7 +536,7 @@
             "Results Table",
             5,
             7,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVWKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -562,7 +572,7 @@
             "By Sector",
             5,
             12,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxNleKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -625,7 +635,7 @@
             "Sales",
             5,
             23,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVOKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Reports/MTM Report Model/Development/Sales.wss#Frame2",
             "",
           ],
@@ -634,7 +644,7 @@
             "EBITDA",
             5,
             24,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVOKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Reports/MTM Report Model/Development/EBITDA.wss#Frame2",
             "",
           ],
@@ -643,7 +653,7 @@
             "EBITDA %",
             5,
             25,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVOKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -652,7 +662,7 @@
             "Free Cash Flow",
             5,
             26,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVOKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -662,7 +672,7 @@
             "Financials",
             27,
             9,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxtlSKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Dashboards/ReportManagement/Navigation/Development/Financials.wss#Frame2",
             "",
           ],
@@ -671,7 +681,7 @@
             "Cement",
             27,
             13,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxtlCKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Dashboards/ReportManagement/Navigation/Development/Cement.wss#Frame2",
             "",
           ],
@@ -680,7 +690,7 @@
             "Ready Mix",
             27,
             16,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVaKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Dashboards/ReportManagement/Navigation/Development/Ready Mix.wss#Frame2",
             "",
           ],
@@ -689,7 +699,7 @@
             "Aggregates",
             27,
             18,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxNlWKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Dashboards/ReportManagement/Navigation/Development/Aggregates.wss#Frame2",
             "",
           ],
@@ -698,7 +708,7 @@
             "Urbanization Solutions",
             27,
             20,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxNVSKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Dashboards/ReportManagement/Navigation/Development/Urbanization Solutions.wss#Frame2",
             "",
           ],
@@ -708,7 +718,7 @@
             "Financial Reports",
             28,
             29,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVGKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -717,7 +727,7 @@
             "Operative Reports",
             28,
             30,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVGKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -726,7 +736,7 @@
             "Analytics Reports",
             28,
             31,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVGKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -735,7 +745,7 @@
             "Internal Control Reports",
             28,
             32,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVGKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -744,7 +754,7 @@
             "Internal Control Reports",
             28,
             33,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVGKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -753,7 +763,7 @@
             "Investor Relations Reports",
             28,
             34,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxMVGKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -763,7 +773,7 @@
             "Upload Center",
             35,
             36,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxsVSKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -776,7 +786,7 @@
             "Upload Tracking",
             35,
             41,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxNVCKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -786,7 +796,7 @@
             "Settings",
             42,
             43,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxsVCKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "",
             "",
           ],
@@ -807,7 +817,7 @@
             "Financials",
             3,
             48,
-            "https://live-cemex.cloud.jedox.com/ui/lnk/?_=a.i1YyNDQwMDNU0jHQUUoz1DXWNTcxtlSKBQA",
+            `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"></path> </svg>`,
             "//Default/LUCA/Dashboards/ReportManagement/Navigation/Development/Financials.wss#Frame2",
             "",
           ],
